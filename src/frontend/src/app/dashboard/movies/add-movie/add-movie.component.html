@@ -1,0 +1,94 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>Add Movie</h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            <form [formGroup]="movieForm" (ngSubmit)="addMovie()" novalidate="novalidate">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" 
+                                class="form-control" 
+                                placeholder="Movie Name"
+                                formControlName="MovieName">
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getMovieForm.MovieName.errors?.required">
+                        Please enter Movie Name.
+                    </p>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="file" 
+                                class="form-control" 
+                                #fileInput 
+                                (change)="uploadFile($event)">
+                    </div>
+                    
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <textarea name="description" 
+                                    cols="30" rows="2"
+                                     class="form-control no-resize" 
+                                     placeholder="Description"
+                                     formControlName="Description"></textarea>
+                        
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getMovieForm.Description.errors?.required">
+                        Please enter    Description.
+                    </p>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" 
+                                class="form-control" 
+                                placeholder="Movie Year"
+                                formControlName="MovieYear">
+                       
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getMovieForm.MovieYear.errors?.required">
+                        Please enter Movie Year.
+                    </p>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" 
+                                class="form-control" 
+                                placeholder="Directors"
+                                formControlName="Directors">
+                        
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getMovieForm.Directors.errors?.required">
+                        Please enter Directors.
+                    </p>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="date" 
+                                class="form-control" 
+                                placeholder="Release Date"
+                                formControlName="ReleaseDate">
+                       
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getMovieForm.ReleaseDate.errors?.required">
+                        Please enter Release Date.
+                    </p>
+                </div>
+                
+                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>

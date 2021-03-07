@@ -1,0 +1,178 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: black;">
+    <div class="card"  style="background-color: black;color:white;">
+      <div class="header"> 
+         <div class="row">
+             <div class="col-lg-12">
+                 <div class="col-lg-6">
+                    <h2 style="color: white;">
+                        MOVIE GALLERY
+                      </h2>
+                 </div>
+                 <div class="col-lg-6">
+                   <!-- {{!checkLogin}} -->
+                  <button type="button"  *ngIf="!checkLogin" style="float: right;" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#login">Login</button>
+                  <button type="button" *ngIf="!checkLogin" style="float: right;" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#register">Register</button>
+                    <!-- <a href="javascript:void(0)" style="float: right;" class="btn btn-success" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Login</a> -->
+                 </div>
+             </div>
+         </div> 
+        
+        
+      </div>
+      <div class="body">
+        <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
+          <div class="movie_card" id="bright" *ngFor="let item of allMovies">
+            <div class="info_section">
+              <div class="movie_header">
+                <img
+                  class="locandina"
+                  src="https://localhost:44393/Posters/{{item.posterfile}}"
+                />
+                <h1>{{item.movieName}}</h1>
+                <h4>{{item.movieYear}},{{item.directors}}</h4>
+                <h4>Rating: {{item?.avgRate}}</h4>
+                <p class="type">Action, Crime, Fantasy</p>
+              </div>
+              <div class="movie_desc">
+                <p class="text">
+                  {{item.description}}
+                </p>
+              </div>
+              <div class="movie_social">
+                <a [routerLink]="['/rating', item.id]" class="btn btn-info"
+                routerLinkActive="router-link-active">Rating</a>
+                <a [routerLink]="['/graph', item.id]" class="btn btn-info"
+                routerLinkActive="router-link-active">view Graph</a>
+              </div>
+            </div>
+            <div class="blur_back bright_back"></div>
+          </div>
+        </div>
+        <!-- login -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="defaultModalLabel">Sign in to start your session</h4>
+                  </div>
+                  <form
+                  id="sign_in"
+                  [formGroup]="loginForm"
+                  (ngSubmit)="onLoginSubmit()"
+                  novalidate="novalidate"
+                  >
+                    <div class="modal-body">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="username"
+                            placeholder="Username"
+                            autofocus
+                          />
+                        </div>
+                        <p
+                          class="text-danger"
+                          *ngIf="submitted && getLoginForm.username.errors?.required"
+                        >
+                          Please enter Username.
+                        </p>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                          <input
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password"
+                          />
+                        </div>
+                        <p
+                          class="text-danger"
+                          *ngIf="submitted && getLoginForm.password.errors?.required"
+                        >
+                          Please enter Password.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success waves-effect">Login</button>
+                        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Close</button>
+                    </div>
+                  </form>  
+              </div>
+          </div>
+        </div>
+        <!-- Register -->
+        <div class="modal" id="register" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="defaultModalLabel">Register</h4>
+                  </div>
+                  <form
+                    id="sign_up"
+                    [formGroup]="registerForm"
+                    (ngSubmit)="onRegisterSubmit()"
+                    novalidate="novalidate"
+                  >
+                    <div class="modal-body">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="username"
+                            placeholder="Username"
+                            autofocus
+                          />
+                        </div>
+                        <p
+                          class="text-danger"
+                          *ngIf="submitted && getregisterForm.username.errors?.required"
+                        >
+                          Please enter Username.
+                        </p>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                          <input
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password"
+                          />
+                        </div>
+                        <p
+                          class="text-danger"
+                          *ngIf="submitted && getregisterForm.password.errors?.required"
+                        >
+                          Please enter Password.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success waves-effect">Register</button>
+                        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Close</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

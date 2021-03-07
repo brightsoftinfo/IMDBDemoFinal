@@ -1,0 +1,28 @@
+<div class="fp-box">
+    <div class="logo">
+        <a href="javascript:void(0);">Rate Movie</a>
+    </div>
+    <div class="card">
+        <div class="body">
+            <form [formGroup]="rateForm" (ngSubmit)="submitRate()">
+                <div class="input-group">
+                    <div class="form-line">
+                        <label for="">Select rate</label>
+                        <select class="form-control"
+                                formControlName="rate">
+                            <option [value]="item" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">{{item}}</option>
+                        </select>
+                    </div>
+                    <p class="text-danger" *ngIf="submitted && getRateForm.rate.errors?.required">
+                        Please select rate.
+                    </p>
+                </div>
+
+                <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Submit</button>
+
+                <div class="row m-t-20 m-b--5 align-center">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
